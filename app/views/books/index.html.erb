@@ -1,0 +1,44 @@
+<main class="index-main">
+  <h2>Books</h2>
+
+    <table class= "index-table">
+      <tr>
+        <th>Title</th> <th>Body</th>
+      </tr>
+      <% @books.each do |b| %>
+        <tr>
+          <td><%= b.title %></td>
+          <td><%= b.body %></td>
+          <td><%= link_to "Show", book_path(b.id) %></td>
+          <td><%= link_to "Edit", edit_book_path(b.id) %></td>
+          <td><%= link_to "Destroy", destroy_book_path(b.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <h3>New Book</h3>
+	  <%= form_for(@book) do |f| %>
+        <% if @book.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+             <h5 class="error-message"><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h5>
+             <ul class="error-text">
+               <% @book.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+               <% end %>
+             </ul>
+          </div>
+        <% end %>
+        <div class="field">
+          <%= f.label :title, "Title"%>
+	        <%= f.text_field :title %>
+        </div>
+        <div class="field">
+          <%= f.label :body, "Body"%>
+          <%= f.text_area :body %>
+        </div>
+        <div><%= f.submit 'Create Book' %></div>
+    <% end %>
+
+</main>
+
+
